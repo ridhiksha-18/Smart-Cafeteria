@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Cafeteria | Data Structures Project</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">🍔</div>
+
+        <div>
+            <h2>Smart Café</h2>
+            <span>DS Project</span>
+        </div>
+    </div>
+
+    <nav>
+        <button class="nav-item active" data-section="dashboard">
+            <span>📊</span>
+            Dashboard
+        </button>
+
+        <button class="nav-item" data-section="menu">
+            <span>🍽️</span>
+            Food Menu
+        </button>
+
+        <button class="nav-item" data-section="orders">
+            <span>📋</span>
+            Order Queue
+        </button>
+
+        <button class="nav-item" data-section="stack">
+            <span>🧱</span>
+            Cancelled Stack
+        </button>
+
+        <button class="nav-item" data-section="search">
+            <span>🔍</span>
+            Search Order
+        </button>
+    </nav>
+
+    <div class="ds-card">
+
+        <div class="ds-title">
+            <span>🧠</span>
+            Data Structures
+        </div>
+
+        <div class="ds-item">
+            <span class="dot array-dot"></span>
+            Array
+            <small>Order Storage</small>
+        </div>
+
+        <div class="ds-item">
+            <span class="dot queue-dot"></span>
+            Queue
+            <small>FIFO</small>
+        </div>
+
+        <div class="ds-item">
+            <span class="dot stack-dot"></span>
+            Stack
+            <small>LIFO</small>
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div>
+            <h1 id="pageTitle">Dashboard</h1>
+            <p id="pageSubtitle">
+                Smart Cafeteria Order Management System
+            </p>
+        </div>
+
+        <div class="top-actions">
+
+            <div class="status">
+                <span class="online-dot"></span>
+                System Online
+            </div>
+
+            <button class="new-order-btn" onclick="openOrderModal()">
+                + New Order
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard" class="section active-section">
+
+        <div class="welcome">
+
+            <div>
+                <span class="welcome-label">WELCOME BACK 👋</span>
+
+                <h2>
+                    Manage your cafeteria
+                    <br>
+                    <span>orders smarter.</span>
+                </h2>
+
+                <p>
+                    Using Array, Queue and Stack data structures
+                    to manage real-world cafeteria orders.
+                </p>
+            </div>
+
+            <div class="welcome-icon">
+                🍽️
+            </div>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    📦
+                </div>
+
+                <div>
+                    <span>Total Orders</span>
+                    <strong id="totalOrders">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    ⏳
+                </div>
+
+                <div>
+                    <span>Pending Orders</span>
+                    <strong id="pendingOrders">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+                    <span>Served Orders</span>
+                    <strong id="servedOrders">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon red">
+                    ✕
+                </div>
+
+                <div>
+                    <span>Cancelled</span>
+                    <strong id="cancelledOrders">0</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DATA STRUCTURES -->
+
+        <div class="dashboard-grid">
+
+            <!-- QUEUE -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="panel-label">DATA STRUCTURE</span>
+                        <h3>Order Queue</h3>
+                    </div>
+
+                    <span class="badge queue-badge">
+                        FIFO
+                    </span>
+
+                </div>
+
+                <p class="panel-description">
+                    Orders are processed in the same order
+                    they are received.
+                </p>
+
+                <div id="dashboardQueue" class="visual-queue">
+                    <div class="empty-state">
+                        No pending orders
+                    </div>
+                </div>
+
+                <button
+                    class="process-btn"
+                    onclick="processNextOrder()"
+                >
+                    Process Next Order →
+                </button>
+
+            </div>
+
+
+            <!-- STACK -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="panel-label">DATA STRUCTURE</span>
+                        <h3>Cancellation Stack</h3>
+                    </div>
+
+                    <span class="badge stack-badge">
+                        LIFO
+                    </span>
+
+                </div>
+
+                <p class="panel-description">
+                    The most recently cancelled order
+                    is restored first.
+                </p>
+
+                <div id="dashboardStack" class="visual-stack">
+                    <div class="empty-state">
+                        No cancelled orders
+                    </div>
+                </div>
+
+                <button
+                    class="undo-btn"
+                    onclick="undoCancellation()"
+                >
+                    ↶ Undo Latest Cancellation
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MENU ================= -->
+
+    <section id="menu" class="section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="welcome-label">CAFETERIA</span>
+                <h2>Our Menu</h2>
+                <p>Select your favourite food and add it to the cart.</p>
+            </div>
+
+            <button
+                class="new-order-btn"
+                onclick="openOrderModal()"
+            >
+                View Cart 🛒
+            </button>
+
+        </div>
+
+
+        <div id="menuGrid" class="food-grid">
+        </div>
+
+    </section>
+
+
+    <!-- ================= ORDERS ================= -->
+
+    <section id="orders" class="section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="welcome-label">QUEUE</span>
+                <h2>Pending Orders</h2>
+
+                <p>
+                    Orders waiting to be processed —
+                    <b>FIFO</b>
+                </p>
+            </div>
+
+            <div class="queue-counter">
+                <span id="queueCount">0</span>
+                orders waiting
+            </div>
+
+        </div>
+
+
+        <div class="queue-visual-container">
+
+            <div class="structure-label">
+                FRONT
+            </div>
+
+            <div id="fullQueue" class="full-queue">
+            </div>
+
+            <div class="structure-label rear-label">
+                REAR
+            </div>
+
+        </div>
+
+
+        <div class="queue-actions">
+
+            <button
+                class="process-btn large"
+                onclick="processNextOrder()"
+            >
+                ▶ Process Front Order
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STACK ================= -->
+
+    <section id="stack" class="section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="welcome-label">STACK</span>
+
+                <h2>Cancelled Orders</h2>
+
+                <p>
+                    Latest cancelled order is restored first —
+                    <b>LIFO</b>
+                </p>
+            </div>
+
+            <div class="stack-counter">
+                <span id="stackCount">0</span>
+                cancelled
+            </div>
+
+        </div>
+
+
+        <div class="stack-container">
+
+            <div class="stack-top-label">
+                TOP ↓
+            </div>
+
+            <div id="fullStack" class="full-stack">
+            </div>
+
+            <div class="stack-bottom">
+                BOTTOM
+            </div>
+
+        </div>
+
+
+        <button
+            class="undo-btn large"
+            onclick="undoCancellation()"
+        >
+            ↶ Undo Latest Cancellation
+        </button>
+
+    </section>
+
+
+    <!-- ================= SEARCH ================= -->
+
+    <section id="search" class="section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="welcome-label">SEARCH</span>
+
+                <h2>Find an Order</h2>
+
+                <p>
+                    Search the order array using Order ID.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="search-box">
+
+            <input
+                type="number"
+                id="searchInput"
+                placeholder="Enter Order ID e.g. 1001"
+            >
+
+            <button onclick="searchOrder()">
+                🔍 Search
+            </button>
+
+        </div>
+
+
+        <div id="searchResult">
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= NEW ORDER MODAL ================= -->
+
+<div id="orderModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+                <span class="welcome-label">
+                    NEW ORDER
+                </span>
+
+                <h2>Create Order</h2>
+            </div>
+
+            <button
+                class="close-btn"
+                onclick="closeOrderModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="customer-field">
+
+            <label>Customer Name</label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter customer name"
+            >
+
+        </div>
+
+
+        <h3>Select Food</h3>
+
+        <div id="modalFoodGrid" class="modal-food-grid">
+        </div>
+
+
+        <div class="cart-summary">
+
+            <div>
+
+                <span>Total Items</span>
+
+                <strong id="cartItems">
+                    0
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>Total Amount</span>
+
+                <strong id="cartTotal">
+                    ₹0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="place-order-btn"
+            onclick="placeOrder()"
+        >
+            Place Order →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast" class="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMessage">Success</span>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
